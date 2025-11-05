@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Domainer",
+    "description": "A trendy cropped sweater perfect for a casual look.",
+    "tools_used": "Fresco",
+    "when_created": 2017,
+    "created_for": "Game Design",
+    "thumbnail": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 2,
+    "title": "Regrant",
+    "description": "Compact trash can for keeping your car clean.",
+    "tools_used": "Procreate",
+    "when_created": 2004,
+    "created_for": "Packaging",
+    "thumbnail": "http://dummyimage.com/200x200.png/ff4444/ffffff"
+  },
+  {
+    "id": 3,
+    "title": "Trippledex",
+    "description": "Brews coffee with a smooth flavor without bitterness.",
+    "tools_used": "Procreate",
+    "when_created": 0,
+    "created_for": "Web Design",
+    "thumbnail": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 4,
+    "title": "Zoolab",
+    "description": "Stylish cap to complete your athletic look.",
+    "tools_used": "Photoshop",
+    "when_created": 2010,
+    "created_for": "Text & Image",
+    "thumbnail": "http://dummyimage.com/200x200.png/cc0000/ffffff"
+  },
+  {
+    "id": 5,
+    "title": "Tin",
+    "description": "A hearty mix of beans in a flavorful tomato broth.",
+    "tools_used": "Fresco",
+    "when_created": 1995,
+    "created_for": "Typography",
+    "thumbnail": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 6,
+    "title": "Veribet",
+    "description": "Multi-level cat tree for climbing and scratching.",
+    "tools_used": "Fresco",
+    "when_created": 2007,
+    "created_for": "Text & Image",
+    "thumbnail": "http://dummyimage.com/200x200.png/dddddd/000000"
+  },
+  {
+    "id": 7,
+    "title": "Voltsillam",
+    "description": "Bold combat boots that make a statement with any outfit.",
+    "tools_used": "Illustrator",
+    "when_created": 2015,
+    "created_for": "Typography",
+    "thumbnail": "http://dummyimage.com/200x200.png/5fa2dd/ffffff"
+  },
+  {
+    "id": 8,
+    "title": "Bigtax",
+    "description": "Freshly baked French baguette, perfect for dipping.",
+    "tools_used": "Figma",
+    "when_created": 2015,
+    "created_for": "Packaging",
+    "thumbnail": "http://dummyimage.com/200x200.png/cc0000/ffffff"
+  },
+  {
+    "id": 9,
+    "title": "Ventosanzap",
+    "description": "Spicy chili sauce for an extra kick in your meals.",
+    "tools_used": "Illustrator",
+    "when_created": 2005,
+    "created_for": "Text & Image",
+    "thumbnail": "http://dummyimage.com/200x200.png/dddddd/000000"
+  },
+  {
+    "id": 10,
+    "title": "Cookley",
+    "description": "Crispy sweet potato bites, delicious as a side or snack.",
+    "tools_used": "Figma",
+    "when_created": 2005,
+    "created_for": "Text & Image",
+    "thumbnail": "http://dummyimage.com/200x200.png/cc0000/ffffff"
+  }
+]
