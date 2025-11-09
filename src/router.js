@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import Home from './views/Home.vue';
+import HomePage from './views/HomePage.vue';
 import AllItems from "@/views/portfolio/AllItems.vue";
 import PortfolioItemDetails from "@/views/portfolio/PortfolioItemDetails.vue";
 
@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: HomePage
   },
   {
     path: '/examples/portfolio/',
