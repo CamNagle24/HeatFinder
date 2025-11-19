@@ -1,4 +1,29 @@
-<script setup>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const inputValue = ref('')
+const router = useRouter()
+
+// const submitSearch = (e: Event) => {
+//   e.preventDefault()
+//   const query = inputValue.value.trim()
+//   if (!query) return
+//
+//   // Navigate to results page with query param
+//   router.push({ name: 'Results', params: { sku: query } })
+//   inputValue.value = ''
+// }
+
+const submitSearch = (e: Event) => {
+  e.preventDefault()
+  const query = inputValue.value.trim()
+  if (!query) return
+
+  // Navigate to results page with query param
+  router.push({ name: 'Results', query: { q: query } })
+  inputValue.value = ''
+}
 </script>
 
 <template>
@@ -17,26 +42,26 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+        <form class="d-flex" role="search" @submit="submitSearch">
+          <input v-model="inputValue" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <img class="IconImage" src="../assets/home-2.svg" alt="Home Icon" />
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <li class="nav-item" @click="$router.push({ name: 'Home' })">
+            <img class="IconImage" src="../assets/svg/home-2.svg" alt="Home Icon" />
+            <span class="nav-link active" aria-current="page">Home</span>
           </li>
-          <li class="nav-item">
-            <img class="IconImage" src="../assets/shop.svg" alt="Shop Icon" />
-            <a class="nav-link" href="#">Shop</a>
+          <li class="nav-item" @click="$router.push({ name: 'Shop' })">
+            <img class="IconImage" src="../assets/svg/shop.svg" alt="Shop Icon" />
+            <span class="nav-link">Shop</span>
           </li>
-          <li class="nav-item">
-            <img class="IconImage" src="../assets/add.svg" alt="Add Icon" />
-            <a class="nav-link" href="#">Add</a>
+          <li class="nav-item" @click="$router.push({ name: 'Add' })">
+            <img class="IconImage" src="../assets/svg/add.svg" alt="Add Icon" />
+            <span class="nav-link">Add</span>
           </li>
-          <li class="nav-item">
-            <img class="IconImage" src="../assets/profile.svg" alt="Profile Icon" />
-            <a class="nav-link" href="#">Profile</a>
+          <li class="nav-item" @click="$router.push({ name: 'Profile' })">
+            <img class="IconImage" src="../assets/svg/profile.svg" alt="Profile Icon" />
+            <span class="nav-link">Profile</span>
           </li>
           <!--          Dont need right now but could be helpful-->
           <!--          <li class="nav-item dropdown">-->
