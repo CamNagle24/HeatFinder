@@ -52,4 +52,28 @@ watch(
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border: 1px solid black;
+    .result-card {
+      height: 40%;
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      .product-image {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+      }
+    }
+  }
+</style>

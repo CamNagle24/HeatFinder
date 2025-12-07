@@ -1,31 +1,72 @@
-<script setup>
-import { shoeInfo } from '../shoeInfo.js'
+<script setup lang="ts">
+import { ref, watch, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import { fetchPopular as fetchPopularAPI } from '@/fetchPopular.js'
 
-const sku = 'air-jordan-4-retro-red-thunder'
+const route = useRoute()
 
-const { product, error } = shoeInfo(sku)
+const results = ref([])
+const loading = ref(false)
+const error = ref(null)
 
+async function loadPopular() {
+  loading.value = true
+  error.value = null
+
+  const { products, error: fetchError } = await fetchPopularAPI()
+
+  results.value = products
+  error.value = fetchError
+
+  loading.value = false
+}
+
+onMounted(loadPopular)
 </script>
 
 <template>
-  <div class="card" v-if="error">
-    <p>{{ error }}</p>
-  </div>
+  <h2 v-if="route.query.q">
+    Results for: <strong>{{ route.query.q }}</strong>
+  </h2>
 
-  <div class="card">
-    <h2>{{ product.title }}</h2>
-    <img :src="product.image" :alt="product.title" style="max-width: 400px">
-    <p><strong>Brand:</strong> {{ product.brand }}</p>
-    <p><strong>SKU:</strong> {{ product.sku }}</p>
-    <p><strong>Price (US 10):
-      {{ product.min_price ? `$${product.min_price}` : 'N/A' }}</strong></p>
-    <a :href="product.link" target="_blank" rel="noopener">
-      View on StockX
-    </a>
-    <p>{{ product }}</p>
+  <div v-if="loading">Loading...</div>
+  <div v-if="error">{{ error }}</div>
+
+  <div class="results-grid">
+    <router-link
+      v-for="item in results"
+      :key="item.id"
+      class="result-card"
+      :to="{ name: 'Product', params: { sku: item.id } }"
+    >
+      <img :src="item.image" :alt="item.title" class="product-image" />
+      <h3>{{ item.title }}</h3>
+    </router-link>
   </div>
 </template>
 
 <style scoped>
-
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border: 1px solid black;
+    .result-card {
+      height: 40%;
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid black;
+      .product-image {
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+      }
+    }
+  }
 </style>
