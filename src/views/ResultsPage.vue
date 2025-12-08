@@ -46,7 +46,9 @@ watch(
       class="result-card"
       :to="{ name: 'Product', params: { sku: item.id } }"
     >
-      <img :src="item.image" :alt="item.title" class="product-image" />
+      <div class="image-wrapper">
+        <img :src="item.image" :alt="item.title" class="product-image" />
+      </div>
       <h3>{{ item.title }}</h3>
     </router-link>
   </div>
@@ -55,23 +57,62 @@ watch(
 <style scoped>
   .results-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 1rem;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 280px;
+    gap: 1rem;
+  }
+
+  /* Tablets */
+  @media (max-width: 1024px) {
+    .results-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* Large phones */
+  @media (max-width: 768px) {
+    .results-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Small phones */
+  @media (max-width: 480px) {
+    .results-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .result-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem;
+    height: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
+
+  .image-wrapper {
+    width: 100%;
+    height: 200px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: row;
-    border: 1px solid black;
-    .result-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+  }
 
-      .product-image {
-        width: 100%;
-        height: 100%;
-        border: 1px solid black;
-      }
-    }
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .result-card h3 {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.2;
   }
 </style>

@@ -38,7 +38,7 @@ watch(
     <img :src="product.value.image" :alt="product.value.title" style="max-width: 400px">
     <p><strong>Brand:</strong> {{ product.value.brand }}</p>
     <p><strong>SKU:</strong> {{ product.value.sku }}</p>
-    <p><strong>Price (US 10):</strong> {{ product.value.min_price ? `$${product.value.min_price}` : 'N/A' }}</p>
+    <p><strong>Lowest Ask:</strong> {{ product.value.min_price ? `$${product.value.min_price}` : 'N/A' }}</p>
     <a :href="product.value.link" target="_blank" rel="noopener">View on StockX</a>
   </div>
 </template>
