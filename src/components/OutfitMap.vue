@@ -129,6 +129,50 @@ function openFormAtLocation(latLng) {
   })
 }
 
+function centerOnUserLocation() {
+  if (!navigator.geolocation) {
+    console.warn('Geolocation not supported')
+    return
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      const userLocation = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+
+      map.value.setCenter(userLocation)
+      map.value.setZoom(14)
+
+      // Optional: marker for user
+      new google.maps.Marker({
+        map: map.value,
+        position: userLocation,
+        title: 'You are here',
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 8,
+          fillColor: '#4285F4',
+          fillOpacity: 1,
+          strokeWeight: 2,
+          strokeColor: '#fff'
+        }
+      })
+    },
+    (error) => {
+      console.warn('Geolocation error:', error)
+      // Optional fallback location
+      map.value.setCenter({ lat: 48.8566, lng: 2.3522 }) // Paris
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 60000
+    }
+  )
+}
+
 // Initialize map
 onMounted(() => {
   const script = document.createElement('script')
@@ -141,6 +185,9 @@ onMounted(() => {
       zoom: 12
     })
     infoWindow.value = new google.maps.InfoWindow()
+
+    // Center on user location
+    centerOnUserLocation()
 
     // Load existing outfits
     loadOutfits()
