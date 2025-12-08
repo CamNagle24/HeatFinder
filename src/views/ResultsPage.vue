@@ -62,13 +62,11 @@ watch(
     flex-direction: row;
     border: 1px solid black;
     .result-card {
-      height: 40%;
-      width: 40%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      border: 1px solid black;
+
       .product-image {
         width: 100%;
         height: 100%;
