@@ -6,6 +6,7 @@
 import { ref, reactive, onMounted } from 'vue'
 import { collection, addDoc, getDocs } from 'firebase/firestore'
 import { db } from '../firebase_conf'
+import { supabase } from '../supabase'
 
 const mapContainer = ref(null)
 const map = ref(null)
@@ -43,12 +44,34 @@ function addMarker(outfit) {
 
   marker.addListener('click', () => {
     const content = `
-      <div>
-        <h3>${outfit.title}</h3>
-        <p>${outfit.description}</p>
-        <img src="${outfit.imageUrl}" style="width:100%;border-radius:5px" />
+      <div style="max-width:240px;font-family:sans-serif">
+        <div
+          style="
+            width:100%;
+            height:160px;
+            overflow:hidden;
+            border-radius:10px;
+            background:#eee;
+            margin-bottom:6px;
+          "
+        >
+          <img
+            src="${outfit.imageUrl}"
+            style="
+              width:100%;
+              height:100%;
+              object-fit:cover;
+            "
+          />
+        </div>
+
+        <h3 style="margin:4px 0;font-size:16px">${outfit.title}</h3>
+        <p style="margin:0;font-size:13px;color:#555">
+          ${outfit.description}
+        </p>
       </div>
     `
+
     infoWindow.value.setContent(content)
     infoWindow.value.open(map.value, marker)
   })
@@ -85,7 +108,7 @@ function openFormAtLocation(latLng) {
     <div style="display:flex;flex-direction:column;gap:5px">
       <input type="text" placeholder="Title" id="outfit-title" />
       <textarea placeholder="Description" id="outfit-desc"></textarea>
-      <input type="text" placeholder="Image URL" id="outfit-img" />
+      <input type="file" id="outfit-img" accept="image/*" />
       <button id="save-outfit">Save</button>
     </div>
   `
@@ -97,7 +120,11 @@ function openFormAtLocation(latLng) {
   container.querySelector('#save-outfit').addEventListener('click', async () => {
     newOutfit.title = container.querySelector('#outfit-title').value
     newOutfit.description = container.querySelector('#outfit-desc').value
-    newOutfit.imageUrl = container.querySelector('#outfit-img').value || 'https://placehold.co/200x150/cccccc/000000/png?text=No+Image'
+
+    const fileInput = container.querySelector('#outfit-img')
+    const file = fileInput.files[0]
+    newOutfit.imageUrl = file ? await uploadImage(file) : 'https://placehold.co/200x150/cccccc/000000/png?text=No+Image'
+
     await saveOutfit()
   })
 }
@@ -125,6 +152,32 @@ onMounted(() => {
   }
   document.head.appendChild(script)
 })
+
+async function uploadImage(file) {
+  if (!file) return null
+
+  const filePath = `outfits/${Date.now()}_${file.name}`
+
+  const { error: uploadError } = await supabase.storage
+    .from('outfits')
+    .upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: file.type
+    })
+
+  if (uploadError) {
+    console.error('Upload error:', uploadError)
+    return null
+  }
+
+  const { data } = supabase.storage
+    .from('outfits')
+    .getPublicUrl(filePath)
+
+  return data.publicUrl
+}
+
 </script>
 
 <style scoped>
