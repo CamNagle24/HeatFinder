@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { shoeInfo } from '@/shoeInfo.js'
 
+
 const route = useRoute()
 const product = ref(null)
 const error = ref(null)

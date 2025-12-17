@@ -7,5 +7,6 @@ import OutfitMap from "@/components/OutfitMap.vue";
 </template>
 
 <style scoped>
-  
+
 </style>
+
