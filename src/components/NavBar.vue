@@ -5,16 +5,6 @@ import { useRouter } from 'vue-router'
 const inputValue = ref('')
 const router = useRouter()
 
-// const submitSearch = (e: Event) => {
-//   e.preventDefault()
-//   const query = inputValue.value.trim()
-//   if (!query) return
-//
-//   // Navigate to results page with query param
-//   router.push({ name: 'Results', params: { sku: query } })
-//   inputValue.value = ''
-// }
-
 const submitSearch = (e: Event) => {
   e.preventDefault()
   const query = inputValue.value.trim()
@@ -58,10 +48,6 @@ const submitSearch = (e: Event) => {
           <li class="nav-item" @click="$router.push({ name: 'Add' })">
             <img class="IconImage" src="../assets/svg/add.svg" alt="Add Icon" />
             <span class="nav-link">Add</span>
-          </li>
-          <li class="nav-item" @click="$router.push({ name: 'Profile' })">
-            <img class="IconImage" src="../assets/svg/profile.svg" alt="Profile Icon" />
-            <span class="nav-link">Profile</span>
           </li>
         </ul>
       </div>

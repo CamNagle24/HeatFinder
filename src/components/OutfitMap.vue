@@ -228,5 +228,4 @@ async function uploadImage(file) {
 </script>
 
 <style scoped>
-/* Optional: style InfoWindow inputs */
 </style>
